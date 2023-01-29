@@ -22,6 +22,10 @@ actor ActorScore {
             highScore = score
         }
     }
+    
+    nonisolated func doAction() {
+        print("doAction")
+    }
 }
 
 
@@ -40,6 +44,7 @@ DispatchQueue.global(qos: .default).async {
 let actorScore = ActorScore()
 Task {
     await actorScore.update(with: 200)
+    actorScore.doAction()
     print(await actorScore.highScore)
 }
 
