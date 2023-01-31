@@ -23,8 +23,23 @@ actor ActorScore {
         }
     }
     
+    func update2(with score: Int) async {
+        logs.append(score)
+        if score > highScore {
+            highScore = score
+        }
+        
+        highScore = await requestHighScore(with: score)
+    }
+    
     nonisolated func doAction() {
         print("doAction")
+        //        logs.append(100)
+    }
+    
+    func requestHighScore(with score: Int) async -> Int {
+        try? await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
+        return score
     }
 }
 
@@ -52,3 +67,21 @@ Task {
     await actorScore.update(with: 210)
     print(await actorScore.highScore)
 }
+
+let actorStore2 = ActorScore()
+Task {
+    await actorStore2.update2(with: 300)
+    print(await actorStore2.logs)
+    print(await actorStore2.highScore)
+}
+Task {
+    await actorStore2.update2(with: 310)
+    print(await actorStore2.logs)
+    print(await actorStore2.highScore)
+}
+
+
+
+
+
+
