@@ -1,0 +1,7 @@
+apple
+boy
+cat
+dog
+curry
+rice
+delicious
