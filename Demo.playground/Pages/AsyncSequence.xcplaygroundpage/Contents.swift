@@ -34,3 +34,4 @@ func readText() {
 readText()
 print("END")
 print(text)
+
